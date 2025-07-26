@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing Inspiration</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #ffffff;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    #quote-box {
+      max-width: 700px;
+      padding: 1.5rem;
+      border-left: 4px solid #333;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #quote-text {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    #quote-author {
+      font-size: 1.2rem;
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div id="quote-box">
+    <div id="quote-text">Loading quote...</div>
+    <div id="quote-author"></div>
+  </div>
+
+  <script>
+    fetch("https://raw.githubusercontent.com/lunardaddy69/writinginspiration/main/quotes.json")
+      .then(response => response.json())
+      .then(quotes => {
+        const random = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById("quote-text").
