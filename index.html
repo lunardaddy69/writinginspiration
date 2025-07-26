@@ -46,7 +46,20 @@
 
   <script>
     fetch("https://raw.githubusercontent.com/lunardaddy69/writinginspiration/main/quotes.json")
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error("HTTP error " + response.status);
+        return response.json();
+      })
       .then(quotes => {
         const random = quotes[Math.floor(Math.random() * quotes.length)];
-        document.getElementById("quote-text").
+        document.getElementById("quote-text").textContent = `"${random.text}"`;
+        document.getElementById("quote-author").textContent = `— ${random.author}`;
+      })
+      .catch(error => {
+        document.getElementById("quote-text").textContent = "Failed to load quote.";
+        document.getElementById("quote-author").textContent = "";
+        console.error("Error fetching quotes.json:", error);
+      });
+  </script>
+</body>
+</html>
